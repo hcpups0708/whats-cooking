@@ -1,5 +1,6 @@
 __author__ = 'Asus Huang'
 import json
+import io
 import random
 import operator
 from pprint import pprint
@@ -14,12 +15,12 @@ X=[]
 Y=[]
 X_test=[]
 #gnb=GaussianNB()
-gnb=OneVsRestClassifier(LinearSVC(random_state=0))
+gnb=OneVsRestClassifier(LinearSVC(random_state=0),-1)
 
-with open('train.json') as data_file:
+with io.open('train.json', encoding = 'utf8') as data_file:
     data = json.load(data_file)
 
-with open('test.json') as data_file:
+with io.open('test.json', encoding = 'utf8') as data_file:
     test = json.load(data_file)
 
 
