@@ -8,6 +8,7 @@ from sklearn.naive_bayes import GaussianNB
 from sklearn.multiclass import OneVsRestClassifier
 from sklearn.multiclass import OneVsOneClassifier
 from sklearn.ensemble import AdaBoostClassifier
+from sklearn.ensemble import GradientBoostingClassifier
 from sklearn.cross_validation import cross_val_score
 from sklearn.svm import LinearSVC
 
@@ -20,7 +21,9 @@ X_test=[]
 #gnb=GaussianNB()
 #gnb=OneVsRestClassifier(LinearSVC(random_state=0))
 #gnb=OneVsOneClassifier(LinearSVC(random_state=0))
-gnb = AdaBoostClassifier(n_estimators=50)
+#gnb = AdaBoostClassifier(n_estimators=50)
+gnb=GradientBoostingClassifier()
+
 
 with io.open('train.json', encoding = 'utf8') as data_file:
     data = json.load(data_file)
@@ -72,7 +75,7 @@ for dish in test:
 
 print("Start training")
 
-#gnb.partial_fit(X,Y,country.keys()) #Only for gnb
+#gnb.partial_fit(X,Y,country.keys()) #Only for GaussianNB
 gnb.fit(X,Y) #one vs rest
 
 print("Start predicting")
@@ -95,7 +98,7 @@ print(result)
 
 print("Scoring result")
 
-#print(gnb.score(X,Y))
-pprint(gnb.staged_score(X,Y)) #Only for AdaBoost
+print(gnb.score(X,Y))
+#pprint(gnb.staged_score(X,Y)) #Only for AdaBoost
 
 #pprint(data)
