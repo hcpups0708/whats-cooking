@@ -9,6 +9,7 @@ from sklearn.multiclass import OneVsRestClassifier
 from sklearn.multiclass import OneVsOneClassifier
 from sklearn.ensemble import AdaBoostClassifier
 from sklearn.ensemble import GradientBoostingClassifier
+from sklearn.neighbors.nearest_centroid import NearestCentroid
 from sklearn.cross_validation import cross_val_score
 from sklearn.svm import LinearSVC
 
@@ -22,7 +23,8 @@ X_test=[]
 #gnb=OneVsRestClassifier(LinearSVC(random_state=0))
 #gnb=OneVsOneClassifier(LinearSVC(random_state=0))
 #gnb = AdaBoostClassifier(n_estimators=50)
-gnb=GradientBoostingClassifier()
+gnb=GradientBoostingClassifier(verbose=1)
+#gnb=NearestCentroid(metric='euclidean')
 
 
 with io.open('train.json', encoding = 'utf8') as data_file:
@@ -76,7 +78,7 @@ for dish in test:
 print("Start training")
 
 #gnb.partial_fit(X,Y,country.keys()) #Only for GaussianNB
-gnb.fit(X,Y) #one vs rest
+gnb.fit(X,Y)
 
 print("Start predicting")
 
