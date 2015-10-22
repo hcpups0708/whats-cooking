@@ -4,6 +4,8 @@ import io
 import random
 import operator
 from pprint import pprint
+import numpy as np
+import matplotlib.pyplot as plt
 from sklearn.naive_bayes import GaussianNB
 from sklearn.multiclass import OneVsRestClassifier
 from sklearn.multiclass import OneVsOneClassifier
@@ -20,11 +22,15 @@ ingredients_total={}
 X=[]
 Y=[]
 X_test=[]
+
+
+label='data=5000,n_estimators=20,learning_rate=0.1,subsample=1'
 #gnb=GaussianNB()
 #gnb=OneVsRestClassifier(LinearSVC(random_state=0))
 #gnb=OneVsOneClassifier(LinearSVC(random_state=0))
 #gnb = AdaBoostClassifier(n_estimators=50)
-gnb=GradientBoostingClassifier(verbose=2)
+n_estimators=20
+gnb=GradientBoostingClassifier(n_estimators=n_estimators,learning_rate=0.1,subsample=1,verbose=2)
 #gnb=NearestCentroid(metric='euclidean')
 #gnb = KNeighborsClassifier(n_neighbors=1, algorithm = 'auto')
 
@@ -37,8 +43,8 @@ with io.open('test.json', encoding = 'utf8') as data_file:
 
 
 
-subdata=data                        #use full data for training
-#subdata=random.sample(data,10000)   #randomly select n data for training
+#subdata=data                        #use full data for training
+subdata=random.sample(data,5000)   #randomly select n data for training
 
 #count and add ingredients
 for dish in subdata:
@@ -99,11 +105,28 @@ for dish in test:
     out.write(str(dish['id'])+","+result[i]+"\n")
     i+=1
 
-
+print(str(len(result))+" results")
 print(result)
 
-print("Scoring result")
 
+print("Plotinging result")
+# compute train set deviance
+train_deviance = np.zeros((n_estimators,), dtype=np.float64)
+
+npY=np.array(Y)
+for i, y_pred in enumerate(gnb.staged_decision_function(X)):
+    # clf.loss_ assumes that y_test[i] in {0, 1}
+    train_deviance[i] = gnb.loss_(npY, y_pred)
+
+plt.plot((np.arange(train_deviance.shape[0]) + 1)[::5], train_deviance[::5], '-', color='blue', label=label)
+
+plt.legend(loc='upper left')
+plt.xlabel('Boosting Iterations')
+plt.ylabel('Train Set Deviance')
+
+plt.show()
+
+print("Scoring result")
 print(gnb.score(X,Y))
 #pprint(gnb.staged_score(X,Y)) #Only for AdaBoost
 
