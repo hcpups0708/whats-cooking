@@ -16,6 +16,9 @@ from sklearn.neighbors import KNeighborsClassifier
 from sklearn.cross_validation import cross_val_score
 from sklearn.svm import LinearSVC
 
+from sklearn.metrics import accuracy_score
+from sklearn.metrics import f1_score
+
 country={}
 ingredients={}
 ingredients_total={}
@@ -24,13 +27,16 @@ Y=[]
 X_test=[]
 
 
-label='data=5000,n_estimators=20,learning_rate=0.1,subsample=1'
 #gnb=GaussianNB()
 #gnb=OneVsRestClassifier(LinearSVC(random_state=0))
 #gnb=OneVsOneClassifier(LinearSVC(random_state=0))
 #gnb = AdaBoostClassifier(n_estimators=50)
+datasize=5000
 n_estimators=20
-gnb=GradientBoostingClassifier(n_estimators=n_estimators,learning_rate=0.1,subsample=1,verbose=2)
+learning_rate=0.1
+subsample=1
+title='data-'+str(datasize)+',n_estimators-'+str(n_estimators)+',learning_rate-'+str(learning_rate)+',subsample-'+str(subsample)
+gnb=GradientBoostingClassifier(n_estimators=n_estimators,learning_rate=learning_rate,subsample=subsample,verbose=2)
 #gnb=NearestCentroid(metric='euclidean')
 #gnb = KNeighborsClassifier(n_neighbors=1, algorithm = 'auto')
 
@@ -44,7 +50,7 @@ with io.open('test.json', encoding = 'utf8') as data_file:
 
 
 #subdata=data                        #use full data for training
-subdata=random.sample(data,5000)   #randomly select n data for training
+subdata=random.sample(data,datasize)   #randomly select n data for training
 
 #count and add ingredients
 for dish in subdata:
@@ -111,20 +117,27 @@ print(result)
 
 print("Plotinging result")
 # compute train set deviance
-train_deviance = np.zeros((n_estimators,), dtype=np.float64)
+train_accuracy = np.zeros((n_estimators,), dtype=np.float64)
+train_f1 = np.zeros((n_estimators,), dtype=np.float64)
 
 npY=np.array(Y)
-for i, y_pred in enumerate(gnb.staged_decision_function(X)):
+for i, y_pred in enumerate(gnb.staged_predict(X)):
     # clf.loss_ assumes that y_test[i] in {0, 1}
-    train_deviance[i] = gnb.loss_(npY, y_pred)
+    train_accuracy[i] = accuracy_score(npY, y_pred)
+    train_f1[i] = f1_score(npY, y_pred,average='weighted')
 
-plt.plot((np.arange(train_deviance.shape[0]) + 1)[::5], train_deviance[::5], '-', color='blue', label=label)
+plt.plot((np.arange(train_accuracy.shape[0]) + 1)[::1], train_accuracy[::1], '-', color='blue', label='train_accuracy')
+plt.plot((np.arange(train_f1.shape[0]) + 1)[::1], train_f1[::1], '-', color='red', label='train_f1')
 
 plt.legend(loc='upper left')
+plt.title(title)
 plt.xlabel('Boosting Iterations')
-plt.ylabel('Train Set Deviance')
+plt.ylabel('Train Set Score')
 
+fig = plt.gcf()
+#fig.savefig(title+'.png')
 plt.show()
+plt.close(fig)
 
 print("Scoring result")
 print(gnb.score(X,Y))
