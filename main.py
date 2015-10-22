@@ -10,6 +10,7 @@ from sklearn.multiclass import OneVsOneClassifier
 from sklearn.ensemble import AdaBoostClassifier
 from sklearn.ensemble import GradientBoostingClassifier
 from sklearn.neighbors.nearest_centroid import NearestCentroid
+from sklearn.neighbors import KNeighborsClassifier
 from sklearn.cross_validation import cross_val_score
 from sklearn.svm import LinearSVC
 
@@ -23,10 +24,11 @@ X_test=[]
 #gnb=OneVsRestClassifier(LinearSVC(random_state=0))
 #gnb=OneVsOneClassifier(LinearSVC(random_state=0))
 #gnb = AdaBoostClassifier(n_estimators=50)
-gnb=GradientBoostingClassifier(verbose=1)
+gnb=GradientBoostingClassifier(verbose=2)
 #gnb=NearestCentroid(metric='euclidean')
+#gnb = KNeighborsClassifier(n_neighbors=1, algorithm = 'auto')
 
-
+#load from json file
 with io.open('train.json', encoding = 'utf8') as data_file:
     data = json.load(data_file)
 
@@ -35,9 +37,10 @@ with io.open('test.json', encoding = 'utf8') as data_file:
 
 
 
-subdata=data
-#subdata=random.sample(data,13000)
+subdata=data                        #use full data for training
+#subdata=random.sample(data,10000)   #randomly select n data for training
 
+#count and add ingredients
 for dish in subdata:
     country[dish['cuisine']]=0
     for ing in dish['ingredients']:
@@ -53,8 +56,9 @@ print(str(len(ingredients_total))+" ingredients loaded")
 
 useIngredients={}
 
+#feature selection
 for ing in ingredients_total.keys():
-    if ingredients_total.get(ing)>=0:
+    if ingredients_total.get(ing)>=0:     #use the ingredients that appared more than n times as feature
         useIngredients[ing]=0
 
 print(str(len(useIngredients))+" feature used")
