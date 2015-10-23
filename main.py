@@ -11,6 +11,8 @@ from sklearn.ensemble import AdaBoostClassifier
 from sklearn.ensemble import GradientBoostingClassifier
 from sklearn.neighbors.nearest_centroid import NearestCentroid
 from sklearn.neighbors import KNeighborsClassifier
+from sklearn.ensemble import RandomForestClassifier
+
 from sklearn.cross_validation import cross_val_score
 from sklearn.svm import LinearSVC
 
@@ -24,9 +26,10 @@ X_test=[]
 #gnb=OneVsRestClassifier(LinearSVC(random_state=0))
 #gnb=OneVsOneClassifier(LinearSVC(random_state=0))
 #gnb = AdaBoostClassifier(n_estimators=50)
-gnb=GradientBoostingClassifier(verbose=2)
+#gnb=GradientBoostingClassifier(verbose=2)
 #gnb=NearestCentroid(metric='euclidean')
 #gnb = KNeighborsClassifier(n_neighbors=1, algorithm = 'auto')
+gnb=RandomForestClassifier(verbose=1,n_jobs=20,min_samples_leaf=2,n_estimators=300,oob_score=1)
 
 #load from json file
 with io.open('train.json', encoding = 'utf8') as data_file:
@@ -37,8 +40,8 @@ with io.open('test.json', encoding = 'utf8') as data_file:
 
 
 
-subdata=data                        #use full data for training
-#subdata=random.sample(data,10000)   #randomly select n data for training
+#subdata=data                        #use full data for training
+subdata=random.sample(data,20000)   #randomly select n data for training
 
 #count and add ingredients
 for dish in subdata:
