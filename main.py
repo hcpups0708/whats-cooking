@@ -31,11 +31,10 @@ X_test=[]
 #gnb=OneVsRestClassifier(LinearSVC(random_state=0))
 #gnb=OneVsOneClassifier(LinearSVC(random_state=0))
 #gnb = AdaBoostClassifier(n_estimators=50)
-datasize=5000
-n_estimators=20
+datasize=50
+n_estimators=50
 learning_rate=0.1
 subsample=1
-title='data-'+str(datasize)+',n_estimators-'+str(n_estimators)+',learning_rate-'+str(learning_rate)+',subsample-'+str(subsample)
 gnb=GradientBoostingClassifier(n_estimators=n_estimators,learning_rate=learning_rate,subsample=subsample,verbose=2)
 #gnb=NearestCentroid(metric='euclidean')
 #gnb = KNeighborsClassifier(n_neighbors=1, algorithm = 'auto')
@@ -49,8 +48,10 @@ with io.open('test.json', encoding = 'utf8') as data_file:
 
 
 
-#subdata=data                        #use full data for training
-subdata=random.sample(data,datasize)   #randomly select n data for training
+subdata=data                        #use full data for training
+#subdata=random.sample(data,datasize)   #randomly select n data for training
+
+title='data-'+str(len(subdata))+',n_estimators-'+str(n_estimators)+',learning_rate-'+str(learning_rate)+',subsample-'+str(subsample)
 
 #count and add ingredients
 for dish in subdata:
@@ -102,7 +103,7 @@ result=gnb.predict(X_test)
 
 print("Output result")
 
-out=open("ans.csv",'w')
+out=open(title+'.csv','w')
 out.write("id,cuisine\n")
 
 i=0
@@ -135,7 +136,7 @@ plt.xlabel('Boosting Iterations')
 plt.ylabel('Train Set Score')
 
 fig = plt.gcf()
-#fig.savefig(title+'.png')
+fig.savefig(title+'.png')
 plt.show()
 plt.close(fig)
 
