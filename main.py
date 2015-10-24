@@ -12,6 +12,7 @@ from sklearn.ensemble import GradientBoostingClassifier
 from sklearn.neighbors.nearest_centroid import NearestCentroid
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.ensemble import RandomForestClassifier
+from sklearn.linear_model import LogisticRegression
 
 from sklearn.cross_validation import cross_val_score
 from sklearn.cross_validation import train_test_split
@@ -24,13 +25,13 @@ X=[]
 Y=[]
 X_unknown=[]
 #gnb=GaussianNB()
-#gnb=OneVsRestClassifier(LinearSVC(random_state=0))
+gnb=OneVsRestClassifier(LogisticRegression())
 #gnb=OneVsOneClassifier(LinearSVC(random_state=0))
 #gnb = AdaBoostClassifier(n_estimators=50)
 #gnb=GradientBoostingClassifier(verbose=2)
 #gnb=NearestCentroid(metric='euclidean')
 #gnb = KNeighborsClassifier(n_neighbors=1, algorithm = 'auto')
-gnb=RandomForestClassifier(verbose=1,n_jobs=20,min_samples_leaf=1,n_estimators=1000,oob_score=1)
+#gnb=RandomForestClassifier(verbose=1,n_jobs=20,min_samples_leaf=1,n_estimators=1000,oob_score=1)
 
 #load from json file
 with io.open('train.json', encoding = 'utf8') as data_file:
@@ -87,8 +88,8 @@ X_train, X_test, Y_train, Y_test = train_test_split(X, Y, test_size=0.2, random_
 
 print("Start training")
 
-#gnb.partial_fit(X,Y,country.keys()) #Only for GaussianNB
 gnb.fit(X_train,Y_train)
+#gnb.fit(X,Y)
 
 print("Start predicting")
 
@@ -110,7 +111,7 @@ print(result)
 
 print("Scoring result")
 
-print("Train set accuracy: "+str(gnb.score(X,Y)))
+print("Train set accuracy: "+str(gnb.score(X_train,Y_train)))
 print("Test set accuracy: "+str(gnb.score(X_test,Y_test)))
 #pprint(gnb.staged_score(X,Y)) #Only for AdaBoost
 
