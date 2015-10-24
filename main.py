@@ -2,6 +2,7 @@ __author__ = 'Asus Huang'
 import json
 import io
 import random
+import multiprocessing as mp
 import operator
 from pprint import pprint
 from sklearn.naive_bayes import GaussianNB
@@ -18,8 +19,7 @@ from sklearn.cross_validation import cross_val_score
 from sklearn.cross_validation import train_test_split
 from sklearn.svm import LinearSVC
 
-
-if __name__ == "__main__": #for parallel runing
+def main():
     country={}
     ingredients={}
     ingredients_total={}
@@ -119,3 +119,7 @@ if __name__ == "__main__": #for parallel runing
     #pprint(gnb.staged_score(X,Y)) #Only for AdaBoost
 
     #pprint(data)
+
+if __name__=='__main__':
+    mp.freeze_support()
+    main()
