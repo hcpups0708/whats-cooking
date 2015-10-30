@@ -50,8 +50,8 @@ def main():
 
 
 
-    #subdata=data                        #use full data for training
-    subdata=random.sample(data,8000)   #randomly select n data for training
+    subdata=data                        #use full data for training
+    #subdata=random.sample(data,8000)   #randomly select n data for training
 
     print(' '.join([WordNetLemmatizer().lemmatize(re.sub('[^A-Za-z]', ' ', word)) for word in re.sub("[^\w]", " ",  'grape tomatoes').split()]))
 
