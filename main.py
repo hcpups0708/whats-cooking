@@ -157,7 +157,6 @@ def main():
     #pprint(gnb.staged_score(X,Y)) #Only for AdaBoost
 
     #pprint(data)
-	
 
 if __name__=='__main__':
     mp.freeze_support()
