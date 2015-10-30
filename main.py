@@ -30,7 +30,7 @@ X_unknown=[]
 #gnb=GradientBoostingClassifier(verbose=2)
 #gnb=NearestCentroid(metric='euclidean')
 #gnb = KNeighborsClassifier(n_neighbors=1, algorithm = 'auto')
-gnb=RandomForestClassifier(verbose=1,n_jobs=20,min_samples_leaf=1,n_estimators=1000,oob_score=1)
+gnb=RandomForestClassifier(verbose=1,n_jobs=3,min_samples_leaf=1,n_estimators=1000,oob_score=1)
 
 #load from json file
 with io.open('train.json', encoding = 'utf8') as data_file:
@@ -110,7 +110,7 @@ print(result)
 
 print("Scoring result")
 
-print("Train set accuracy: "+str(gnb.score(X,Y)))
+print("Train set accuracy: "+str(gnb.score(X_train,Y_train)))
 print("Test set accuracy: "+str(gnb.score(X_test,Y_test)))
 #pprint(gnb.staged_score(X,Y)) #Only for AdaBoost
 
