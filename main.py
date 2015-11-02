@@ -77,7 +77,7 @@ def main():
     #feature selection
     spice_total={}
     spice_ings=[]
-    for ing in ingredients_total.keys():
+    for ing in ingredients_total.keys():  #set in order
         if ingredients_total.get(ing)>=0:     #use the ingredients that appared more than n times as feature
             useIngredients[ing]=0
         for word in ing.split():
