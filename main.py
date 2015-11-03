@@ -12,11 +12,11 @@ from sklearn.ensemble import GradientBoostingClassifier
 from sklearn.neighbors.nearest_centroid import NearestCentroid
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.ensemble import RandomForestClassifier
-
+from sklearn import linear_model
 from sklearn.cross_validation import cross_val_score
 from sklearn.cross_validation import train_test_split
 from sklearn.svm import LinearSVC
-
+from sklearn import svm
 country={}
 ingredients={}
 ingredients_total={}
@@ -24,13 +24,14 @@ X=[]
 Y=[]
 X_unknown=[]
 #gnb=GaussianNB()
-#gnb=OneVsRestClassifier(LinearSVC(random_state=0))
+gnb=OneVsRestClassifier(linear_model.BayesianRidge())
 #gnb=OneVsOneClassifier(LinearSVC(random_state=0))
 #gnb = AdaBoostClassifier(n_estimators=50)
 #gnb=GradientBoostingClassifier(verbose=2)
 #gnb=NearestCentroid(metric='euclidean')
 #gnb = KNeighborsClassifier(n_neighbors=1, algorithm = 'auto')
-gnb=RandomForestClassifier(verbose=1,n_jobs=3,min_samples_leaf=1,n_estimators=1000,oob_score=1)
+#gnb=RandomForestClassifier(verbose=1,n_jobs=3,min_samples_leaf=1,n_estimators=1000,oob_score=1)
+#gnb = svm.SVC()
 
 #load from json file
 with io.open('train.json', encoding = 'utf8') as data_file:
@@ -42,7 +43,7 @@ with io.open('test.json', encoding = 'utf8') as data_file:
 
 
 subdata=data                        #use full data for training
-#subdata=random.sample(data,20000)   #randomly select n data for training
+#subdata=random.sample(data,1000)   #randomly select n data for training
 
 #count and add ingredients
 for dish in subdata:
