@@ -1,17 +1,15 @@
 
 import json
-import io
 import time
+import cStringIO
+import re, os, io
 from sets import Set
 
-class Test(object):
+class Raw(object):
 	def __init__(self, fn):
 		self._fn = fn
-		self._filterWords = Set()
-		self._filterWords_dirty = True
-
 		self.rawData = None
-
+		self.outputPrefix = './'
 		self._load()
 
 	""" PROTECTED METHOD (mechanism approach) """
@@ -23,11 +21,65 @@ class Test(object):
 
 		assert self.rawData is not None
 
+	""" PUBLIC METHOD (policy approach) """
+
+	def addFilterIngredients(self, ingredients):
+		pass
+
+	def getIngredientFilteredRaw(self, filter):
+		pass
+
+	def setOutputPrefix(self, prefix):
+		if re.match('.*\/$', prefix):
+			self.outputPrefix = prefix
+		else:
+			self.outputPrefix = prefix+'/'
+
+	def dumpToFile(self, obj, extra_string = ''):
+		assert type(extra_string) is str
+		
+		if not os.path.exists(self.outputPrefix):
+			os.makedirs(self.outputPrefix)
+
+		with io.open(self.outputPrefix+extra_string+'_'+self._fn , encoding = 'utf8', mode = 'w') as _file:
+			try:
+				_data = json.dumps(obj, ensure_ascii=False, indent=4, sort_keys=True).decode('utf8')
+				_file.write(_data)
+			except TypeError: 
+				_file.write(_data.decode('utf8'))
+			except OverflowError: raise
+			finally:
+				_file.close()
+
+
+class Test(Raw):
+	def __init__(self, fn):
+		#self._fn = fn
+		self._filterWords = Set()
+		self._filterWords_dirty = True
+
+		Raw.__init__(self, fn)
+		#self.rawData = None
+
+		#self._load()
+
+	""" PROTECTED METHOD (mechanism approach) """
+
 	def _parseRaw_getAllIngredientList(self):
 		for dish in self.rawData:
 			_ingredients = dish['ingredients']
 			_ingredients = map(self._ingredient_tokfilter, _ingredients)
 			self._allIngredient |= Set(_ingredients)
+
+	def _parseRaw_getIngredientFrequent(self):
+		for dish in self.rawData:
+			_ingredients = dish['ingredients']
+			_ingredients = map(self._ingredient_tokfilter, _ingredients)
+			for ing_name in _ingredients:
+				if ing_name in self._ingredientFrequent:
+					self._ingredientFrequent[ing_name] += 1
+				else :
+					self._ingredientFrequent[ing_name] = 1
 
 	def _ingredient_tokfilter(self, name):
 		tokens = name.split(' ')
@@ -65,16 +117,16 @@ class Test(object):
 
 		return list(self._allIngredient)
 
-	def dumpToFile(self, obj, extra_string = ''):
-		assert type(extra_string) is str
-		try:
-			timenow = time.time().replace('.', '_')
-			with io.open(self._fn + timenow + extra_string, encoding = 'utf8') as _file:
-				json.dump(obj, _file, indent=4, sort_keys=True)
-		except TypeError: raise
-		except OverflowError: raise
-		finally:
-			_file.close()
+	def getIngredientFrequent(self):
+		if not hasattr(self, '_ingredientFrequent'):
+			self._ingredientFrequent = {}
+			self._filterWords_dirty = True
+
+		if self._filterWords_dirty is True:
+			self._parseRaw_getIngredientFrequent()
+			self._filterWords_dirty = False
+
+		return self._ingredientFrequent
 
 
 class Train(Test):
