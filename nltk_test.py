@@ -1,28 +1,54 @@
 
 import json
 import nltk
+import io
+from nltk import pos_tag, word_tokenize
+from nltk.corpus import brown
 
 def main():
-	sentences = [ \
-		"Madras curry powder", \
-		"cream cheese soften", \
-		"A Taste Thai Rice Noodles", \
-		"oz diced tomato", \
-		"Alexia Waffle Fries", \
-		"Alaskan king crab leg", \
+	dictionary = {}
+	sentences = []
+	
+	with io.open("out/ingredient_list_train_cleaned.json", encoding = 'utf8') as data_file:
+		sentences = json.load(data_file)
+		data_file.close()
+	
+	"""	
+	sentences = [ 
+		"diced tomato",
+		"pork roast",
+		"boneless skinless chicken breast half",
+		"hard boiled egg",
+		"hard cheese",
+		"chopped ham"
 	]
-
+	"""
+	
 	for sentence in sentences:
-		tokens = nltk.word_tokenize(sentence)
-		tokens = filter(lambda x: x!='oz', tokens)
-		
-		tagged = nltk.pos_tag(tokens)
-		
-		entities = nltk.chunk.ne_chunk(tagged)
-		
-		print entities
-		#print tokens
-		#print tagged
+
+		tagged = pos_tag(word_tokenize(sentence), tagset='universal')
+				
+		for row in tagged:
+			if row[0] not in dictionary:
+				dictionary[ row[0] ] = {}
+
+			if row[1] not in dictionary[ row[0] ]:
+				dictionary[row[0]][row[1]] = 1
+			else:
+				dictionary[row[0]][row[1]] += 1
+
+	#print dictionary
+
+	with io.open("dictionary.json" , encoding = 'utf8', mode = 'w') as _file:
+		try:
+			_data = json.dumps(dictionary, ensure_ascii=False, indent=4, sort_keys=True).decode('utf8')
+			_file.write(_data)
+		except TypeError: 
+			_file.write(_data.decode('utf8'))
+		except OverflowError: raise
+		finally:
+			_file.close()
+
 
 if __name__=='__main__':
 	main()
