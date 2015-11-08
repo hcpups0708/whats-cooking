@@ -11,6 +11,8 @@ AGENT = "%s/1.0" % __name__
 obj = 'wiki butternut squash'.replace(' ', '+')
 url = 'https://www.google.com.tw/search?q='+obj
 
+wikiFilter = re.compile('^\/url[?]q=(https?:\/\/[a-z]{2,3}\.wikipedia\.org\/wiki\/\S+?)[%&]')
+
 content,req, handle = (None, None, None)
 
 try:
@@ -33,4 +35,8 @@ if handle:
 		all_a = soup.find_all('a')
 		urls = []
 		for a in all_a:
-			print a['href'] 
+			#print a['href']
+                        urls = wikiFilter.findall(a['href'])
+                        if urls.counts is not 0:
+
+                        
