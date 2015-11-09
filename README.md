@@ -1,45 +1,45 @@
 # whats-cooking
 
-nltk_test.py
+## nltk_test.py
 
-Description: 
+### Description: 
 
-> generate the word type in the of token in ingredients
+ generate the word type in the of token in ingredients
 
-Futher TODO: 
+### Futher TODO: 
 	
-> choose the most frequent type of the token
+ choose the most frequent type of the token
 	
-> e.g.
+### e.g.
 
-> ``` json
-> ..
-> "chicken": {
-> 		"ADJ": 7, 
->		"NOUN": 157, 
->		"VERB": 18
->	}, 
-> },
-> ..
-> ```
+ ``` json
+ ..
+ "chicken": {
+ 		"ADJ": 7, 
+		"NOUN": 157, 
+		"VERB": 18
+	}, 
+ },
+ ..
+ ```
 	
-> so "chicken" would catogorize as "NOUN"
+ so "chicken" would catogorize as "NOUN"
 	
-> and then maybe try to remove all the verb or adj in ingredients
+ and then maybe try to remove all the verb or adj in ingredients
 
 ---
 
-please ignore ANN and CRAWLER... that is half-finish code
+### please ignore ANN and CRAWLER... that is half-finish code
 
 ---
 
-WhatsCooking.py
+## WhatsCooking.py
 
-Description:
+### Description:
 	
-> main class of WhatsCooking selfmade tools
+ main class of WhatsCooking selfmade tools
 
-Further TODO:
+### Further TODO:
 	
-> add tested feature into it
+ add tested feature into it
 
