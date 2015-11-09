@@ -1,8 +1,10 @@
 # whats-cooking
 
 nltk_test.py
+
 Description: 
 	generate the word type in the of token in ingredients
+
 Futher TODO: 
 	choose the most frequent type of the token
 	e.g.
