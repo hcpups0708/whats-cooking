@@ -29,6 +29,8 @@ vectorizertr = TfidfVectorizer(stop_words='english',
                              ngram_range = ( 1 , 1 ),analyzer="word", 
                              max_df = .67 , binary=False , token_pattern=r'\w+' , sublinear_tf=False)
 tfidftr=vectorizertr.fit_transform(corpustr).todense()
+print(vectorizertr.get_feature_names())
+sw=vectorizertr.get_stop_words()
 corpusts = testdf['ingredients_string']
 vectorizerts = TfidfVectorizer(stop_words='english')
 tfidfts=vectorizertr.transform(corpusts)

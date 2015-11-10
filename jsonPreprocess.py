@@ -15,7 +15,7 @@ for idx, dish in enumerate(data):
         words=[]
         for w in [WordNetLemmatizer().lemmatize(re.sub('[^A-Za-z]', '', word)) for word in re.sub("[^\w]", " ", ing).split()]:
             #if w not in stopwords.words('english'):
-                words.append(w)
+                words.append(w.lower())
         data[idx]['ingredients'][idx2]=' '.join(words)
     #print(idx)
 
@@ -24,7 +24,7 @@ for idx, dish in enumerate(test):
         words=[]
         for w in [WordNetLemmatizer().lemmatize(re.sub('[^A-Za-z]', '', word)) for word in re.sub("[^\w]", " ", ing).split()]:
             #if w not in stopwords.words('english'):
-                words.append(w)
+                words.append(w.lower())
         test[idx]['ingredients'][idx2]=' '.join(words)
 
 with io.open('train_cleaned_with_stop.json', 'wb') as data_file:

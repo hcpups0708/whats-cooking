@@ -40,16 +40,23 @@ def main():
     #gnb=RandomForestClassifier(verbose=1,n_jobs=2,min_samples_leaf=1,n_estimators=200,oob_score=1)
 
     #load from json file
-    with io.open('train_cleaned.json', encoding = 'utf8') as data_file:
+    with io.open('train_cleaned_with_stop.json', encoding = 'utf8') as data_file:
         data = json.load(data_file)
 
-    with io.open('train_cleaned.json', encoding = 'utf8') as data_file:
+    with io.open('test.json', encoding = 'utf8') as data_file:
         test = json.load(data_file)
 
     with io.open('spice.txt', encoding = 'utf8') as f:
         spices = f.read().splitlines()
 
+    with io.open('meat.txt', encoding = 'utf8') as f:
+        meat = f.read().splitlines()
 
+    with io.open('seafood.txt', encoding = 'utf8') as f:
+        seafood = f.read().splitlines()
+
+    with io.open('veg.txt', encoding = 'utf8') as f:
+        veg = f.read().splitlines()
 
     subdata=data                        #use full data for training
     #subdata=random.sample(data,20)   #randomly select n data for training
@@ -77,6 +84,12 @@ def main():
     #feature selection
     spice_total={}
     spice_ings=[]
+    meat_total={}
+    meat_ings=[]
+    seafood_total={}
+    seafood_ings=[]
+    veg_total={}
+    veg_ings=[]
     for ing in ingredients_total.keys():
         if ingredients_total.get(ing)>=0:     #use the ingredients that appared more than n times as feature
             useIngredients[ing]=0
@@ -88,21 +101,67 @@ def main():
                     spice_total[word]=1
                 if ing not in spice_ings:
                     spice_ings.append(ing)
+            if word in meat:
+                if word in meat_total:
+                    meat_total[word]+=1
+                else:
+                    meat_total[word]=1
+                if ing not in meat_ings:
+                    meat_ings.append(ing)
+            if word in seafood:
+                if word in seafood_total:
+                    seafood_total[word]+=1
+                else:
+                    seafood_total[word]=1
+                if ing not in seafood_ings:
+                    seafood_ings.append(ing)
+            if word in veg:
+                if word in veg_total:
+                    veg_total[word]+=1
+                else:
+                    veg_total[word]=1
+                if ing not in veg_ings:
+                    veg_ings.append(ing)
 
     print(str(len(spice_total))+" spices found")
+    print(str(len(meat_total))+" meat found")
+    print(str(len(seafood_total))+" seafoods found")
+    print(str(len(veg_total))+" vegetables found")
 
     for dish in subdata:
         attr=useIngredients.copy()
         attr['ingUsedInDish']=0
         attr['spiceRate']=0.0
-        country[dish['cuisine']]+=1;
+        attr['meatRate']=0.0
+        attr['seafoodRate']=0.0
+        attr['vegRate']=0.0
         for ing in dish['ingredients']:
             if ing in ingredients_total:
                 attr[ing]+=1
                 attr['ingUsedInDish']+=1
                 if ing in spice_ings:
                     attr['spiceRate']+=1
-        attr['spiceRate']/=attr['ingUsedInDish']
+                if ing in meat_ings:
+                    attr['meatRate']+=1
+                if ing in seafood_ings:
+                    attr['seafoodRate']+=1
+                if ing in seafood_ings:
+                    attr['vegRate']+=1
+        if attr['meatRate']+attr['seafoodRate']==0:
+            attr['vegetarianDish']=1
+        else:
+            attr['vegetarianDish']=0
+        if attr['ingUsedInDish'] > 0:
+            attr['spiceRate']/=attr['ingUsedInDish']
+            attr['meatRate']/=attr['ingUsedInDish']
+            attr['seafoodRate']/=attr['ingUsedInDish']
+            attr['vegRate']/=attr['ingUsedInDish']
+        else:
+            attr['spiceRate']=0
+            attr['meatRate']=0
+            attr['seafoodRate']=0
+            attr['vegRate']=0
+            print(dish['id'])
         #print(dish['id'],attr['spiceRate'],attr['ingUsedInDish'])
         X.append(attr.values())
         Y.append(dish['cuisine'])
@@ -111,13 +170,36 @@ def main():
         attr=useIngredients.copy()
         attr['ingUsedInDish']=0
         attr['spiceRate']=0.0
+        attr['meatRate']=0.0
+        attr['seafoodRate']=0.0
+        attr['vegRate']=0.0
         for ing in dish['ingredients']:
             if ing in ingredients_total:
                 attr[ing]+=1
                 attr['ingUsedInDish']+=1
                 if ing in spice_ings:
                     attr['spiceRate']+=1
-        attr['spiceRate']/=attr['ingUsedInDish']
+                if ing in meat_ings:
+                    attr['meatRate']+=1
+                if ing in seafood_ings:
+                    attr['seafoodRate']+=1
+                if ing in seafood_ings:
+                    attr['vegRate']+=1
+        if attr['meatRate']+attr['seafoodRate']==0:
+            attr['vegetarianDish']=1
+        else:
+            attr['vegetarianDish']=0
+        if attr['ingUsedInDish'] > 0:
+            attr['spiceRate']/=attr['ingUsedInDish']
+            attr['meatRate']/=attr['ingUsedInDish']
+            attr['seafoodRate']/=attr['ingUsedInDish']
+            attr['vegRate']/=attr['ingUsedInDish']
+        else:
+            attr['spiceRate']=0
+            attr['meatRate']=0
+            attr['seafoodRate']=0
+            attr['vegRate']=0
+            print(dish['id'])
         #print(dish['id'],attr['spiceRate'],attr['ingUsedInDish'])
         X_unknown.append(attr.values())
     print(str(len(X[1]))+" features used")
@@ -149,6 +231,7 @@ def main():
 
     print(str(len(result))+" results")
     print(result)
+    out.close()
 
     print("Scoring result")
 
