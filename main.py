@@ -6,6 +6,7 @@ import multiprocessing as mp
 import re
 import os
 import operator
+import numpy as np
 from pprint import pprint
 from nltk.stem import WordNetLemmatizer
 from nltk.corpus import stopwords
@@ -17,6 +18,7 @@ from sklearn.ensemble import GradientBoostingClassifier
 from sklearn.neighbors.nearest_centroid import NearestCentroid
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.ensemble import RandomForestClassifier
+from sklearn.ensemble import VotingClassifier
 from sklearn.linear_model import LogisticRegression
 
 from sklearn.cross_validation import cross_val_score
@@ -31,16 +33,21 @@ def main():
     Y=[]
     X_unknown=[]
     #gnb=GaussianNB()
-    gnb=OneVsRestClassifier(LogisticRegression(),n_jobs=1)
+    ovr=OneVsRestClassifier(LogisticRegression(),n_jobs=1)
+    ovo=OneVsOneClassifier(LogisticRegression())
+    rf=RandomForestClassifier(verbose=1,n_jobs=20,min_samples_leaf=1,n_estimators=300,oob_score=1)
+    knn=KNeighborsClassifier(n_neighbors=5, algorithm = 'auto')
+    #gnb=OneVsRestClassifier(LogisticRegression(),n_jobs=1)
     #gnb=OneVsOneClassifier(LinearSVC(random_state=0))
     #gnb = AdaBoostClassifier(n_estimators=50)
     #gnb=GradientBoostingClassifier(verbose=2)
     #gnb=NearestCentroid(metric='euclidean')
-    #gnb = KNeighborsClassifier(n_neighbors=1, algorithm = 'auto')
+    gnb = KNeighborsClassifier(n_neighbors=1, algorithm = 'auto', n_jobs=2)
     #gnb=RandomForestClassifier(verbose=1,n_jobs=2,min_samples_leaf=1,n_estimators=200,oob_score=1)
+    #gnb=VotingClassifier(estimators=[('ovr', ovr), ('knn', knn), ('rf', rf)], voting='soft', weights=[3,1,2])
 
     #load from json file
-    with io.open('train_cleaned_with_stop.json', encoding = 'utf8') as data_file:
+    with io.open('train.json', encoding = 'utf8') as data_file:
         data = json.load(data_file)
 
     with io.open('test.json', encoding = 'utf8') as data_file:
@@ -58,8 +65,8 @@ def main():
     with io.open('veg.txt', encoding = 'utf8') as f:
         veg = f.read().splitlines()
 
-    subdata=data                        #use full data for training
-    #subdata=random.sample(data,20)   #randomly select n data for training
+    #subdata=data                        #use full data for training
+    subdata=random.sample(data,200)   #randomly select n data for training
 
 
     #count and add ingredients / countries
@@ -165,6 +172,8 @@ def main():
         #print(dish['id'],attr['spiceRate'],attr['ingUsedInDish'])
         X.append(attr.values())
         Y.append(dish['cuisine'])
+    X=np.array(X)
+    Y=np.array(Y)
 
     for dish in test:
         attr=useIngredients.copy()
@@ -202,6 +211,8 @@ def main():
             print(dish['id'])
         #print(dish['id'],attr['spiceRate'],attr['ingUsedInDish'])
         X_unknown.append(attr.values())
+    X_unknown=np.array(X_unknown)
+
     print(str(len(X[1]))+" features used")
 
     X_train, X_test, Y_train, Y_test = train_test_split(X, Y, test_size=0.2, random_state=0)
@@ -209,8 +220,8 @@ def main():
     print("Start training")
     #os.system("pause")
 
-    gnb.fit(X_train,Y_train)
-    #gnb.fit(X,Y)
+    #gnb.fit(X_train,Y_train)
+    gnb.fit(X,Y)
 
     #print(gnb.feature_importances_)
 

@@ -1,0 +1,81 @@
+mean: 0.78237, std: 0.00261, params: {'weights': [4, 3, 1, 2], 'rf__n_estimators': 300, 'lr__C': 1}
+mean: 0.78358, std: 0.00298, params: {'weights': [5, 3, 2, 3], 'rf__n_estimators': 300, 'lr__C': 1}
+mean: 0.78242, std: 0.00214, params: {'weights': [4, 3, 1, 2], 'rf__n_estimators': 1000, 'lr__C': 1}
+mean: 0.78378, std: 0.00294, params: {'weights': [5, 3, 2, 3], 'rf__n_estimators': 1000, 'lr__C': 1}
+mean: 0.79001, std: 0.00081, params: {'weights': [4, 3, 1, 2], 'rf__n_estimators': 300, 'lr__C': 100}
+mean: 0.79230, std: 0.00131, params: {'weights': [5, 3, 2, 3], 'rf__n_estimators': 300, 'lr__C': 100}
+mean: 0.78999, std: 0.00091, params: {'weights': [4, 3, 1, 2], 'rf__n_estimators': 1000, 'lr__C': 100}
+mean: 0.79258, std: 0.00102, params: {'weights': [5, 3, 2, 3], 'rf__n_estimators': 1000, 'lr__C': 100}
+100>1 300=1000 upload=0.79767
+mean: 0.79456, std: 0.00107, params: {'weights': [4, 3, 1, 3], 'rf__n_estimators': 300, 'lr__C': 10}
+mean: 0.79301, std: 0.00087, params: {'weights': [5, 4, 1, 3], 'rf__n_estimators': 300, 'lr__C': 10}
+mean: 0.79399, std: 0.00106, params: {'weights': [4, 3, 1, 3], 'rf__n_estimators': 1000, 'lr__C': 10}
+mean: 0.79260, std: 0.00127, params: {'weights': [5, 4, 1, 3], 'rf__n_estimators': 1000, 'lr__C': 10}
+mean: 0.79160, std: 0.00085, params: {'weights': [4, 3, 1, 3], 'rf__n_estimators': 300, 'lr__C': 100}
+mean: 0.78971, std: 0.00084, params: {'weights': [5, 4, 1, 3], 'rf__n_estimators': 300, 'lr__C': 100}
+mean: 0.79177, std: 0.00114, params: {'weights': [4, 3, 1, 3], 'rf__n_estimators': 1000, 'lr__C': 100}
+mean: 0.78991, std: 0.00083, params: {'weights': [5, 4, 1, 3], 'rf__n_estimators': 1000, 'lr__C': 100}
+10>100 300=1000 upload=0.80068
+mean: 0.78589, std: 0.00058, params: {'weights': [1, 1, 2, 1], 'rf__n_estimators': 300, 'lr__C': 5}
+mean: 0.79243, std: 0.00109, params: {'weights': [1, 1, 1, 2], 'rf__n_estimators': 300, 'lr__C': 5}
+mean: 0.78587, std: 0.00055, params: {'weights': [1, 1, 2, 1], 'rf__n_estimators': 1000, 'lr__C': 5}
+mean: 0.79265, std: 0.00096, params: {'weights': [1, 1, 1, 2], 'rf__n_estimators': 1000, 'lr__C': 5}
+mean: 0.78730, std: 0.00092, params: {'weights': [1, 1, 2, 1], 'rf__n_estimators': 300, 'lr__C': 10}
+mean: 0.79426, std: 0.00035, params: {'weights': [1, 1, 1, 2], 'rf__n_estimators': 300, 'lr__C': 10}
+mean: 0.78720, std: 0.00097, params: {'weights': [1, 1, 2, 1], 'rf__n_estimators': 1000, 'lr__C': 10}
+mean: 0.79459, std: 0.00103, params: {'weights': [1, 1, 1, 2], 'rf__n_estimators': 1000, 'lr__C': 10}
+4>3 10>5 1000>300 upload=0.80159
+mean: 0.79446, std: 0.00121, params: {'weights': [2, 1, 1, 1], 'rf__n_estimators': 300, 'lr__C': 5}
+mean: 0.79145, std: 0.00157, params: {'weights': [1, 2, 1, 1], 'rf__n_estimators': 300, 'lr__C': 5}
+mean: 0.79499, std: 0.00092, params: {'weights': [2, 1, 1, 1], 'rf__n_estimators': 1000, 'lr__C': 5}
+mean: 0.79162, std: 0.00147, params: {'weights': [1, 2, 1, 1], 'rf__n_estimators': 1000, 'lr__C': 5}
+mean: 0.79615, std: 0.00106, params: {'weights': [2, 1, 1, 1], 'rf__n_estimators': 300, 'lr__C': 10}
+mean: 0.79321, std: 0.00187, params: {'weights': [1, 2, 1, 1], 'rf__n_estimators': 300, 'lr__C': 10}
+mean: 0.79600, std: 0.00137, params: {'weights': [2, 1, 1, 1], 'rf__n_estimators': 1000, 'lr__C': 10}
+mean: 0.79275, std: 0.00190, params: {'weights': [1, 2, 1, 1], 'rf__n_estimators': 1000, 'lr__C': 10}
+1>2 10>5 300=1000 upload=0.80179
+1>3 4>2 1>4 2>3
+1>4>2>3 
+mean: 0.79409, std: 0.00120, params: {'weights': [7, 3, 1, 5], 'rf__n_estimators': 300, 'lr__C': 10}
+mean: 0.79610, std: 0.00078, params: {'weights': [5, 3, 2, 4], 'rf__n_estimators': 300, 'lr__C': 10}
+mean: 0.79441, std: 0.00129, params: {'weights': [7, 3, 1, 5], 'rf__n_estimators': 500, 'lr__C': 10}
+mean: 0.79632, std: 0.00071, params: {'weights': [5, 3, 2, 4], 'rf__n_estimators': 500, 'lr__C': 10}
+mean: 0.79195, std: 0.00083, params: {'weights': [7, 3, 1, 5], 'rf__n_estimators': 300, 'lr__C': 50}
+mean: 0.79497, std: 0.00095, params: {'weights': [5, 3, 2, 4], 'rf__n_estimators': 300, 'lr__C': 50}
+mean: 0.79182, std: 0.00117, params: {'weights': [7, 3, 1, 5], 'rf__n_estimators': 500, 'lr__C': 50}
+mean: 0.79487, std: 0.00113, params: {'weights': [5, 3, 2, 4], 'rf__n_estimators': 500, 'lr__C': 50}
+[5, 3, 2, 4]>[7, 3, 1, 5] 10>50 300=500 upload=0.80139
+mean: 0.79557, std: 0.00089, params: {'weights': [4, 2, 1, 3], 'rf__n_estimators': 300, 'lr__C': 10}
+mean: 0.79426, std: 0.00116, params: {'weights': [8, 2, 1, 4], 'rf__n_estimators': 300, 'lr__C': 10}
+mean: 0.79544, std: 0.00079, params: {'weights': [4, 2, 1, 3], 'rf__n_estimators': 500, 'lr__C': 10}
+mean: 0.79421, std: 0.00144, params: {'weights': [8, 2, 1, 4], 'rf__n_estimators': 500, 'lr__C': 10}
+mean: 0.79391, std: 0.00103, params: {'weights': [4, 2, 1, 3], 'rf__n_estimators': 300, 'lr__C': 50}
+mean: 0.78949, std: 0.00104, params: {'weights': [8, 2, 1, 4], 'rf__n_estimators': 300, 'lr__C': 50}
+mean: 0.79363, std: 0.00111, params: {'weights': [4, 2, 1, 3], 'rf__n_estimators': 500, 'lr__C': 50}
+mean: 0.78946, std: 0.00141, params: {'weights': [8, 2, 1, 4], 'rf__n_estimators': 500, 'lr__C': 50}
+[4, 2, 1, 3]>[8, 2, 1, 4] 10>50 300>500 upload=0.80109
+mean: 0.79768, std: 0.00055, params: {'rf__n_estimators': 300, 'weights': [5, 2, 1, 3], 'knn__n_neighbors': 1, 'lr__C': 10}
+mean: 0.79698, std: 0.00079, params: {'rf__n_estimators': 300, 'weights': [5, 2, 1, 3], 'knn__n_neighbors': 2, 'lr__C': 10}
+mean: 0.79527, std: 0.00104, params: {'rf__n_estimators': 300, 'weights': [5, 2, 1, 3], 'knn__n_neighbors': 5, 'lr__C': 10}
+mean: 0.79268, std: 0.00087, params: {'rf__n_estimators': 300, 'weights': [5, 2, 1, 3], 'knn__n_neighbors': 10, 'lr__C': 10}
+1>2>5>10 upload=0.80451
+mean: 0.79434, std: 0.00129, params: {'weights': [5, 2, 1, 3], 'rf__oob_score':0, 'rf__n_estimators': 300, 'lr__C': 10}
+mean: 0.79539, std: 0.00073, params: {'weights': [4, 2, 1, 4], 'rf__oob_score':0, 'rf__n_estimators': 300, 'lr__C': 10}
+mean: 0.79524, std: 0.00135, params: {'weights': [5, 2, 1, 3], 'rf__oob_score':1, 'rf__n_estimators': 300, 'lr__C': 10}
+mean: 0.79572, std: 0.00079, params: {'weights': [4, 2, 1, 4], 'rf__oob_score':1, 'rf__n_estimators': 300, 'lr__C': 10}
+1>0 upload=0.80048
+mean: 0.79738, std: 0.00050, params: {'rf__n_estimators': 300, 'lr__class_weight': None, 'weights': [5, 2, 1, 3], 'knn__n_neighbors': 1, 'lr__C': 10}
+mean: 0.79534, std: 0.00045, params: {'rf__n_estimators': 300, 'lr__class_weight': None, 'weights': [2, 1, 1, 2], 'knn__n_neighbors': 1, 'lr__C': 10}
+mean: 0.80032, std: 0.00236, params: {'rf__n_estimators': 300, 'lr__class_weight': 'balanced', 'weights': [5, 2, 1, 3], 'knn__n_neighbors': 1, 'lr__C': 10}
+mean: 0.79572, std: 0.00109, params: {'rf__n_estimators': 300, 'lr__class_weight': 'balanced', 'weights': [2, 1, 1, 2], 'knn__n_neighbors': 1, 'lr__C': 10}
+'balanced'>None [5, 2, 1, 3]>[2, 1, 1, 2] 1.csv
+mean: 0.79522, std: 0.00098, params: {'rf__n_estimators': 300, 'knn__weights': 'uniform', 'rf__class_weight': None, 'lr__C': 10, 'weights': [5, 2, 1, 3]}
+mean: 0.79499, std: 0.00118, params: {'rf__n_estimators': 300, 'knn__weights': 'uniform', 'rf__class_weight': 'balanced', 'lr__C': 10, 'weights': [5, 2, 1, 3]}
+mean: 0.79615, std: 0.00131, params: {'rf__n_estimators': 300, 'knn__weights': 'distance', 'rf__class_weight': None, 'lr__C': 10, 'weights': [5, 2, 1, 3]}
+mean: 0.79527, std: 0.00141, params: {'rf__n_estimators': 300, 'knn__weights': 'distance', 'rf__class_weight': 'balanced', 'lr__C': 10, 'weights': [5, 2, 1, 3]}
+'distance'>'uniform' None>'balanced' 2.csv
+
+mean: 0.79788, std: 0.00267, params: {'weights': [5, 2, 1, 3], 'rf__n_estimators': 300, 'lr__C': 10}
+mean: 0.78609, std: 0.00135, params: {'weights': [2, 1, 1, 1], 'rf__n_estimators': 300, 'lr__C': 10}
+[5, 2, 1, 3]>[2, 1, 1, 1] 3.csv
+
