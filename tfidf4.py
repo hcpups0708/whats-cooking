@@ -1,6 +1,7 @@
 from pandas import Series, DataFrame
 import pandas as pd
 import numpy as np
+import xgboost as xgb
 import nltk
 import re
 from nltk.stem import WordNetLemmatizer
@@ -19,25 +20,34 @@ from sklearn.ensemble import AdaBoostClassifier
 from sklearn.ensemble import BaggingClassifier
 from sklearn.ensemble import ExtraTreesClassifier
 from sklearn.naive_bayes import MultinomialNB
+from sklearn.svm import SVC
+from sklearn.linear_model import SGDClassifier
+from xgboost import XGBClassifier
+from sklearn.feature_selection import chi2, SelectPercentile, f_classif, SelectKBest
 
 
 # A combination of Word lemmatization + LinearSVC model finally pushes the accuracy score past 80%
 
 traindf = pd.read_json("train.json")
-traindf['ingredients_clean_string'] = [' , '.join(z).strip() for z in traindf['ingredients']]  
-traindf['ingredients_string'] = [' '.join([WordNetLemmatizer().lemmatize(re.sub('[^A-Za-z]', ' ', line)) for line in lists]).strip() for lists in traindf['ingredients']]       
-
 testdf = pd.read_json("test.json")
-testdf['ingredients_clean_string'] = [' , '.join(z).strip() for z in testdf['ingredients']]
+a=traindf['ingredients']
+b=testdf['ingredients']
+c=np.append(a,b)
+d=pd.Series(c)
+#traindf['ingredients_clean_string'] = [' , '.join(z).strip() for z in traindf['ingredients']]  
+corpustr = [' '.join([WordNetLemmatizer().lemmatize(re.sub('[^A-Za-z]', ' ', line)) for line in lists]).strip() for lists in d]       
+traindf['ingredients_string'] =[' '.join([WordNetLemmatizer().lemmatize(re.sub('[^A-Za-z]', ' ', line)) for line in lists]).strip() for lists in traindf['ingredients']]
+#testdf['ingredients_clean_string'] = [' , '.join(z).strip() for z in testdf['ingredients']]
 testdf['ingredients_string'] = [' '.join([WordNetLemmatizer().lemmatize(re.sub('[^A-Za-z]', ' ', line)) for line in lists]).strip() for lists in testdf['ingredients']]       
 
 #print(traindf['ingredients_string'])
 
-corpustr = traindf['ingredients_string']
+#corpustr = traindf['ingredients_string']
 vectorizertr = TfidfVectorizer(stop_words='english',
                              ngram_range = ( 1 , 1 ),analyzer="word",
                              max_df = .67 , binary=False , token_pattern=r'\w+' , sublinear_tf=False)
-tfidftr=vectorizertr.fit_transform(corpustr).todense()
+vectorizertr.fit(corpustr)
+tfidftr=vectorizertr.transform(traindf['ingredients_string']).todense()
 #print(vectorizertr.get_feature_names())
 sw=vectorizertr.get_stop_words()
 corpusts = testdf['ingredients_string']
@@ -55,18 +65,23 @@ X_unknown = tfidfts
 X_train, X_test, Y_train, Y_test = train_test_split(X, Y, test_size=0.25, random_state=0)
 
 #classifier = LinearSVC(C=0.80, penalty="l2", dual=False)
-#parameters = {'weights':[[5,2,1,3]]}
-parameters = {'weights':[[5,6,2,1,3]]}
+parameters = {'weights':[[5,4,1,1,3],[5,4,1,1,4]]}
+#parameters = {'n_estimators':[500],'learning_rate': [0.08],'subsample':[0.65],'objective':['multi:softmax'],'base_score':[0.05]}
+#parameters = {'base_estimator__class_weight':['balanced'],'base_estimator__loss':['modified_huber'],'base_estimator__penalty':['elasticnet']}
+#parameters = {'n_iter':[5,50,100]}
 lsvc = LinearSVC()
+svc=SVC(verbose=1,kernel='linear',probability=True)
+sgd=SGDClassifier(loss='modified_huber',penalty='elasticnet')
 lr = LogisticRegression(class_weight='balanced',C=10)
-ovr=OneVsRestClassifier(LogisticRegression(),n_jobs=1)
+ovr=OneVsRestClassifier(svc,n_jobs=1)
 rf=RandomForestClassifier(verbose=1,n_jobs=20,min_samples_leaf=1,n_estimators=500,oob_score=1,max_features='log2')
 knn=KNeighborsClassifier(n_neighbors=1, algorithm = 'brute',weights='distance')
 ab=AdaBoostClassifier(n_estimators=50)
-bag=BaggingClassifier(n_estimators=100,max_features=0.5)
+bag=BaggingClassifier(verbose=10,base_estimator=sgd,n_estimators=50)
 etc=ExtraTreesClassifier(verbose=1,n_jobs=20,n_estimators=1000)
 mnb=MultinomialNB(alpha=0.025)
-vc=VotingClassifier(estimators=[('etc',etc),('lr', lr),('ovr', ovr), ('knn', knn), ('rf', rf)], voting='soft')
+xgb=XGBClassifier(n_estimators=750,learning_rate=0.08,subsample=0.65,objective='multi:softmax',base_score=0.05)
+vc=VotingClassifier(estimators=[('etc',etc),('lr', lr), ('knn', knn), ('rf', rf),('xgb',xgb)], voting='soft')
 classifier = grid_search.GridSearchCV(vc, parameters,verbose=2)
 
 classifier.fit(X,Y)
@@ -79,7 +94,7 @@ print(predictions)
 testdf['cuisine'] = predictions
 testdf = testdf.sort('id' , ascending=True)
 
-testdf[['id' , 'cuisine' ]].to_csv("submission4.csv",index = False)
+testdf[['id' , 'cuisine' ]].to_csv("submission4_xgb.csv",index = False)
 
 print("Scoring result")
 for dict in classifier.grid_scores_:

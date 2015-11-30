@@ -216,7 +216,7 @@ mean: 0.80372, std: 0.00208, params: {'weights': [3, 3, 1, 1, 1]}
 mean: 0.80452, std: 0.00233, params: {'weights': [4, 3.5, 1, 1, 1]}
 mean: 0.80500, std: 0.00189, params: {'weights': [5, 4, 1, 1, 1]}
 mean: 0.80495, std: 0.00270, params: {'weights': [6, 4.5, 1, 1, 1]}
-5>6>4>3>2 20.csv
+5>6>4>3>2 20.csv upload=0.81114
 mean: 0.80445, std: 0.00229, params: {'weights': [6, 4.5, 1, 1, 2]}
 mean: 0.80364, std: 0.00133, params: {'weights': [7.1, 5, 1, 1, 3]}
 mean: 0.80299, std: 0.00154, params: {'weights': [8.2, 5.5, 1, 1, 4]}
@@ -234,6 +234,108 @@ mean: 0.80329, std: 0.00206, params: {'weights': [5, 4, 2, 1, 1]}
 mean: 0.80163, std: 0.00168, params: {'weights': [5, 4, 3, 1, 1]}
 mean: 0.79989, std: 0.00182, params: {'weights': [5, 4, 4, 1, 1]}
 mean: 0.79813, std: 0.00131, params: {'weights': [5, 4, 5, 1, 1]}
-21.csv
+21.csv upload=0.81124
+mean: 0.80485, std: 0.00208, params: {'weights': [5, 4, 1, 1, 1]}
+mean: 0.80445, std: 0.00197, params: {'weights': [5, 4, 1, 2, 1]}
+mean: 0.80304, std: 0.00192, params: {'weights': [5, 4, 1, 3, 1]}
+mean: 0.80183, std: 0.00188, params: {'weights': [5, 4, 1, 4, 1]}
+mean: 0.79972, std: 0.00257, params: {'weights': [5, 4, 1, 5, 1]}
+
+mean: 0.80495, std: 0.00163, params: {'weights': [5, 4]}VotingClassifier(estimators=[('etc',etc),('lr', lr)], voting='soft')
+22.csv upload=0.80863
+mean: 0.80359, std: 0.00140, params: {'weights': [5, 4, 1]}
+mean: 0.80178, std: 0.00159, params: {'weights': [5, 4, 2]}
+mean: 0.80030, std: 0.00141, params: {'weights': [5, 4, 3]}
+mean: 0.79899, std: 0.00176, params: {'weights': [5, 4, 4]}
+mean: 0.79813, std: 0.00101, params: {'weights': [5, 4, 5]}VotingClassifier(estimators=[('etc',etc),('lr', lr),('ovr', ovr)], voting='soft')
+
+mean: 0.80462, std: 0.00194, params: {'weights': [5, 4, 1]}
+mean: 0.80500, std: 0.00197, params: {'weights': [5, 4, 2]}
+mean: 0.80439, std: 0.00181, params: {'weights': [5, 4, 3]}
+mean: 0.80316, std: 0.00226, params: {'weights': [5, 4, 4]}
+mean: 0.80191, std: 0.00137, params: {'weights': [5, 4, 5]}VotingClassifier(estimators=[('etc',etc),('lr', lr),('rf', rf)], voting='soft')
+23.csv upload=0.80943
+mean: 0.80626, std: 0.00196, params: {'weights': [5, 4, 1]}
+mean: 0.80530, std: 0.00181, params: {'weights': [5, 4, 2]}
+mean: 0.80442, std: 0.00203, params: {'weights': [5, 4, 3]}
+mean: 0.80228, std: 0.00178, params: {'weights': [5, 4, 4]}
+mean: 0.79964, std: 0.00203, params: {'weights': [5, 4, 5]}VotingClassifier(estimators=[('etc',etc),('lr', lr),('knn', knn)], voting='soft')
+24.csv upload=0.81165
+mean: 0.80218, std: 0.00149, params: {'weights': [5, 4, 1]}
+mean: 0.79924, std: 0.00155, params: {'weights': [5, 4, 2]}
+mean: 0.79788, std: 0.00162, params: {'weights': [5, 4, 3]}
+mean: 0.79582, std: 0.00058, params: {'weights': [5, 4, 4]}
+mean: 0.79434, std: 0.00116, params: {'weights': [5, 4, 5]}VotingClassifier(estimators=[('etc',etc),('lr', lr),('bag', bag)], voting='soft')
+
+mean: 0.80631, std: 0.00154, params: {'weights': [5, 4, 1, 1]}
+mean: 0.80588, std: 0.00220, params: {'weights': [5, 4, 1, 2]}
+mean: 0.80492, std: 0.00206, params: {'weights': [5, 4, 2, 1]}
+mean: 0.80530, std: 0.00144, params: {'weights': [5, 4, 2, 2]}VotingClassifier(estimators=[('etc',etc),('lr', lr),('knn', knn),('rf', rf)], voting='soft')
+25.csv upload=0.81205
+mean: 0.80656, std: 0.00193, params: {'weights': [5, 4, 1, 1, 1]}
+mean: 0.80608, std: 0.00202, params: {'weights': [5, 4, 1, 1, 2]}
+mean: 0.80490, std: 0.00153, params: {'weights': [5, 4, 1, 1, 3]}
+26.csv upload=0.81185
+mean: 0.80367, std: 0.00142, params: {'weights': [5, 4, 1, 1, 4]}
+mean: 0.80181, std: 0.00051, params: {'weights': [5, 4, 1, 1, 5]}VotingClassifier(estimators=[('etc',etc),('lr', lr),('knn', knn),('rf', rf),('xgb',xgb)], voting='soft')
+
 mean: 0.65663, std: 0.00399, params: {'n_estimators': 750, 'learning_rate': 0.1}
 mean: 0.65757, std: 0.00508, params: {'n_estimators': 750, 'learning_rate': 0.08}xgb
+mean: 0.77981, std: 0.00143, params: {'n_estimators': 500, 'learning_rate': 0.1}
+mean: 0.77732, std: 0.00172, params: {'n_estimators': 500, 'learning_rate': 0.08}xgb(39774L, 3077L)
+mean: 0.78275, std: 0.00156, params: {'n_estimators': 750, 'subsample': 0.65, 'learning_rate': 0.08}(39774L, 1000L)
+
+mean: 0.80133, std: 0.00122, params: {'weights': [4, 5, 2, 1, 3]}(39774L, 1000L)
+mean: 0.80216, std: 0.00134, params: {'weights': [4, 5, 2, 1, 3]}(39774L, 1500L)
+mean: 0.80248, std: 0.00176, params: {'weights': [4, 5, 2, 1, 3]}(39774L, 2000L)
+mean: 0.79871, std: 0.00111, params: {'weights': [4, 5, 2, 1, 3]}('X_tfidf_sel', (39774L, 2500L))('X_ing_sel', (39774L, 500L))('X', (39774L, 3000L))
+
+mean: 0.80517, std: 0.00173, params: {'weights': [5, 4, 1, 1]}('X_ing_sel', (39774L, 5L))('X', (39774L, 3082L)) chi2
+mean: 0.79879, std: 0.00258, params: {'weights': [5, 4, 1, 1]}('X_ing_sel', (39774L, 50L))('X', (39774L, 3127L)) chi2
+mean: 0.80533, std: 0.00181, params: {'weights': [5, 4, 1, 1]}('X_ing_sel', (39774L, 5L))('X', (39774L, 3082L)) f_classif
+mean: 0.80025, std: 0.00244, params: {'weights': [5, 4, 1, 1]}('X_ing_sel', (39774L, 50L))('X', (39774L, 3127L)) f_classif
+mean: 0.79851, std: 0.00243, params: {'weights': [5, 4, 1, 1]}('X_ing_sel', (39774L, 100L))('X', (39774L, 3177L)) f_classif
+mean: 0.79866, std: 0.00248, params: {'weights': [5, 4, 1, 1]}('X_tfidf_sel', (39774L, 3000L))('X_ing_sel', (39774L, 77L))('X', (39774L, 3077L))f_classif
+mean: 0.80470, std: 0.00159, params: {'weights': [5, 4, 1, 1]}('X_tfidf_sel', (39774L, 3050L))('X_ing_sel', (39774L, 5L))('X', (39774L, 3060L)) +X_extra
+
+mean: 0.78622, std: 0.00109, params: {'base_estimator__C': 1, 'base_estimator__class_weight': None}
+mean: 0.77405, std: 0.00202, params: {'base_estimator__C': 1, 'base_estimator__class_weight': 'balanced'}
+mean: 0.77249, std: 0.00287, params: {'base_estimator__C': 10, 'base_estimator__class_weight': None}
+mean: 0.76143, std: 0.00355, params: {'base_estimator__C': 10, 'base_estimator__class_weight': 'balanced'}
+
+mean: 0.80628, std: 0.00175, params: {'weights': [5, 4, 1, 1]}('X_tfidf_sel', (39774L, 3077L))('X_ing_sel', (39774L, 1L))('X', (39774L, 3078L)) f_classif
+28.csv upload=0.80963
+mean: 0.80651, std: 0.00208, params: {'weights': [5, 4, 1, 1]}('X', (39774L, 3082L)) X_extra
+29.csv upload=0.81165
+mean: 0.77772, std: 0.00085, params: {'base_estimator__class_weight': None}
+mean: 0.76744, std: 0.00207, params: {'base_estimator__class_weight': 'balanced'}BaggingClassifier(verbose=10,base_estimator=sgd,n_estimators=50)
+mean: 0.78245, std: 0.00230, params: {'base_estimator__penalty': 'elasticnet', 'base_estimator__loss': 'modified_huber', 'base_estimator__class_weight': 'balanced'}
+
+mean: 0.80593, std: 0.00230, params: {'weights': [5, 4, 0.5, 1, 1]}
+mean: 0.80593, std: 0.00131, params: {'weights': [5, 4, 1, 1, 1]}
+mean: 0.80548, std: 0.00144, params: {'weights': [5, 4, 2, 1, 1]}VotingClassifier(estimators=[('etc',etc),('lr', lr),('dc', dc), ('knn', knn), ('rf', rf)], voting='soft')
+30.csv
+mean: 0.80676, std: 0.00246, params: {'weights': [5, 4, 1, 1], 'knn__n_neighbors': 1}
+mean: 0.80626, std: 0.00159, params: {'weights': [5, 4, 1, 1], 'knn__n_neighbors': 15}
+31.csv 0.81144
+
+left=bag(sgd)
+mean: 0.80357, std: 0.00178, params: {'weights': [5, 4, 1]}
+mean: 0.80233, std: 0.00150, params: {'weights': [5, 4, 2]}
+mean: 0.79974, std: 0.00179, params: {'weights': [5, 4, 3]}VotingClassifier(estimators=[('etc',etc),('lr', lr),('xgb',xgb)], voting='soft')
+XGBClassifier(n_estimators=100,learning_rate=0.08,subsample=0.65,objective='multi:softmax',base_score=0.05)
+mean: 0.80407, std: 0.00187, params: {'weights': [5, 4, 1]}
+XGBClassifier(n_estimators=200,learning_rate=0.1,subsample=0.65,objective='multi:softmax',base_score=0.05)
+mean: 0.77229, std: 0.00165, params: {'n_iter': 5}
+mean: 0.78451, std: 0.00064, params: {'n_iter': 50}
+mean: 0.78702, std: 0.00033, params: {'n_iter': 100}sgd
+
+mean: 0.80402, std: 0.00182, params: {'weights': [5, 4, 1]}
+mean: 0.80331, std: 0.00111, params: {'weights': [5, 4, 2]}
+mean: 0.80216, std: 0.00155, params: {'weights': [5, 4, 3]}VotingClassifier(estimators=[('etc',etc),('lr', lr),('sgd',sgd)], voting='soft')
+
+mean: 0.80578, std: 0.00104, params: {'weights': [5, 4, 1]}XGBClassifier(n_estimators=750,learning_rate=0.08,subsample=0.65,objective='multi:softmax',base_score=0.05)
+32.csv
+mean: 0.80822, std: 0.00254, params: {'weights': [5, 4, 1, 1, 1]}
+mean: 0.80905, std: 0.00244, params: {'weights': [5, 4, 1, 1, 2]}XGBClassifier(n_estimators=750,learning_rate=0.08,subsample=0.65,objective='multi:softmax',base_score=0.05)
+33.csv upload=0.81285

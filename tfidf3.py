@@ -4,6 +4,7 @@ import numpy as np
 import nltk
 import re
 from nltk.stem import WordNetLemmatizer
+from sklearn.svm import LinearSVC
 from sklearn.svm import SVC
 from sklearn.metrics import classification_report
 import sklearn.metrics
@@ -55,21 +56,22 @@ X_unknown = tfidfts
 X_train, X_test, Y_train, Y_test = train_test_split(X, Y, test_size=0.25, random_state=0)
 
 #classifier = LinearSVC(C=0.80, penalty="l2", dual=False)
-#parameters = {'weights':[[5,2,1,3]]}
-parameters = {'weights':[[4,5,2,1,3]]}
+parameters = {'weights':[[1,4,5,2,1,3],[1,5,6,2,1,3],[1,5,6,3,2,4]]}
+#parameters = {}
+lsvc = LinearSVC() #best:C=1
 svc = SVC(probability=True)
 lr = LogisticRegression(class_weight='balanced',C=10)
 ovr=OneVsRestClassifier(LogisticRegression(),n_jobs=1)
 rf=RandomForestClassifier(verbose=1,n_jobs=20,min_samples_leaf=1,n_estimators=500,oob_score=1,max_features='log2')
-knn=KNeighborsClassifier(n_neighbors=1, algorithm = 'brute',weights='distance')
+knn=KNeighborsClassifier(n_neighbors=1, algorithm = 'brute',weights='distance')#best: n_neighbors=15
 ab=AdaBoostClassifier(n_estimators=50)
-bag=BaggingClassifier(verbose=10,base_estimator=LogisticRegression(solver='newton-cg'),n_estimators=5,max_samples=1.0,max_features=0.1)
+bag=BaggingClassifier(verbose=10,base_estimator=lsvc,n_estimators=50)
 etc=ExtraTreesClassifier(verbose=1,n_jobs=20,n_estimators=1000)
 mnb=MultinomialNB(alpha=0.025)
 bnb=BernoulliNB(0.025)
-vc=VotingClassifier(estimators=[('etc',etc),('lr', lr),('ovr', ovr), ('knn', knn), ('rf', rf)], voting='soft')
+vc=VotingClassifier(estimators=[('bag',bag),('etc',etc),('lr', lr),('ovr', ovr), ('knn', knn), ('rf', rf)], voting='soft',weights=[4,5,2,1,3])
 classifier = grid_search.GridSearchCV(vc, parameters,verbose=2)
-
+#classifier =vc
 classifier.fit(X,Y)
 #classifier.fit(X_train,Y_train)
 
