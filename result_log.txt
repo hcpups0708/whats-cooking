@@ -337,5 +337,66 @@ mean: 0.80216, std: 0.00155, params: {'weights': [5, 4, 3]}VotingClassifier(esti
 mean: 0.80578, std: 0.00104, params: {'weights': [5, 4, 1]}XGBClassifier(n_estimators=750,learning_rate=0.08,subsample=0.65,objective='multi:softmax',base_score=0.05)
 32.csv
 mean: 0.80822, std: 0.00254, params: {'weights': [5, 4, 1, 1, 1]}
-mean: 0.80905, std: 0.00244, params: {'weights': [5, 4, 1, 1, 2]}XGBClassifier(n_estimators=750,learning_rate=0.08,subsample=0.65,objective='multi:softmax',base_score=0.05)
+mean: 0.80905, std: 0.00244, params: {'weights': [5, 4, 1, 1, 2]}
+mean: 0.80809, std: 0.00209, params: {'weights': [5, 4, 1, 1, 3]}
+mean: 0.80701, std: 0.00218, params: {'weights': [5, 4, 1, 1, 4]}XGBClassifier(n_estimators=750,learning_rate=0.08,subsample=0.65,objective='multi:softmax',base_score=0.05)
 33.csv upload=0.81285
+mean: 0.80766, std: 0.00208, params: {'weights': [5, 4, 1, 1, 1]}
+mean: 0.80593, std: 0.00209, params: {'weights': [5, 4, 1, 1, 2]}LinearSVC(multi_class='crammer_singer')
+
+mean: 0.80379, std: 0.00080, params: {'weights': [5, 4, 1, 2], 'xgb__max_depth': 3}
+mean: 0.80432, std: 0.00148, params: {'weights': [5, 4, 1, 2], 'xgb__max_depth': 15}
+mean: 0.80487, std: 0.00189, params: {'weights': [5, 4, 1, 2], 'xgb__max_depth': 25}
+
+mean: 0.76952, std: 0.00172, params: {'n_estimators': 300, 'subsample': 1.0, 'learning_rate': 0.3}
+mean: 0.76879, std: 0.00073, params: {'n_estimators': 300, 'subsample': 0.8, 'learning_rate': 0.3}
+mean: 0.76500, std: 0.00198, params: {'n_estimators': 300, 'subsample': 0.65, 'learning_rate': 0.3}
+mean: 0.76940, std: 0.00211, params: {'n_estimators': 750, 'subsample': 1.0, 'learning_rate': 0.3}
+mean: 0.76683, std: 0.00187, params: {'n_estimators': 750, 'subsample': 0.8, 'learning_rate': 0.3}
+mean: 0.76256, std: 0.00182, params: {'n_estimators': 750, 'subsample': 0.65, 'learning_rate': 0.3}
+mean: 0.77425, std: 0.00218, params: {'n_estimators': 300, 'subsample': 1.0, 'learning_rate': 0.08}
+mean: 0.77631, std: 0.00153, params: {'n_estimators': 300, 'subsample': 0.8, 'learning_rate': 0.08}
+mean: 0.77629, std: 0.00171, params: {'n_estimators': 300, 'subsample': 0.65, 'learning_rate': 0.08}
+mean: 0.77536, std: 0.00248, params: {'n_estimators': 750, 'subsample': 1.0, 'learning_rate': 0.08}
+mean: 0.77719, std: 0.00222, params: {'n_estimators': 750, 'subsample': 0.8, 'learning_rate': 0.08}
+mean: 0.77520, std: 0.00208, params: {'n_estimators': 750, 'subsample': 0.65, 'learning_rate': 0.08}
+
+mean: 0.13008, std: 0.04497, params: {'learning_rate': 0.2}
+mean: 0.16757, std: 0.04173, params: {'learning_rate': 0.02}
+mean: 0.76505, std: 0.00075, params: {'learning_rate': 0.002}
+
+mean: 0.76377, std: 0.00252, params: {'learning_rate': 0.002}
+mean: 0.76573, std: 0.00423, params: {'learning_rate': 0.001}
+mean: 0.76739, std: 0.00262, params: {'learning_rate': 0.0005}mlp.Layer("Tanh", units=n_feat/16),mlp.Layer("Rectifier", units=n_feat/32),mlp.Layer("Softmax", units=20)],
+
+mean: 0.80711, std: 0.00220, params: {'weights': [6, 4, 1]}VotingClassifier(estimators=[('etc',etc),('lr', lr), ('knn', knn)], voting='soft')
+
+mean: 0.80761, std: 0.00278, params: {'nn__learning_rate': 0.002, 'weights': [5, 4, 1, 1, 1]}
+mean: 0.80741, std: 0.00137, params: {'nn__learning_rate': 0.002, 'weights': [5, 4, 1, 1, 2]}
+mean: 0.80807, std: 0.00254, params: {'nn__learning_rate': 0.001, 'weights': [5, 4, 1, 1, 1]}
+mean: 0.80729, std: 0.00225, params: {'nn__learning_rate': 0.001, 'weights': [5, 4, 1, 1, 2]}mlp.Layer("Tanh", units=n_feat/8),	mlp.Layer("Sigmoid", units=n_feat/32),mlp.Layer("Softmax", units=20)],
+
+mean: 0.80771, std: 0.00221, params: {'nn__learning_rate': 0.001, 'weights': [5, 4, 1, 1, 1]}
+mean: 0.80759, std: 0.00201, params: {'nn__learning_rate': 0.0009, 'weights': [5, 4, 1, 1, 1]}mlp.Layer("Tanh", units=n_feat/8),mlp.Layer("Sigmoid", units=n_feat/32),mlp.Layer("Softmax", units=20)],
+
+mean: 0.80962, std: 0.00195, params: {'weights': [6, 4, 1, 1]}
+mean: 0.80879, std: 0.00195, params: {'weights': [6, 4, 1, 2]}
+mean: 0.80877, std: 0.00126, params: {'weights': [7, 4, 1, 1]}
+mean: 0.80812, std: 0.00196, params: {'weights': [7, 4, 1, 2]}('etc',etc),('lr', lr), ('knn', knn), ('xgb', xgb)
+43.csv upload=0.81346
+44.csv upload=0.81516 2 layers
+
+mean: 0.81013, std: 0.00220, params: {'weights': [6, 4, 1, 1, 1]}
+mean: 0.80972, std: 0.00284, params: {'weights': [6, 4, 1, 1, 2]}
+mean: 0.80947, std: 0.00290, params: {'weights': [7, 5, 1, 1, 2]}('etc',etc),('lr', lr), ('knn', knn), ('xgb', xgb), ('nn', nn)
+nn=mlp.Classifier(
+	layers=[
+		mlp.Layer("Tanh", units=n_feat/8),
+		mlp.Layer("Rectifier", units=n_feat/32),
+		mlp.Layer("Softmax", units=20)],
+	n_iter=20,
+	n_stable=3,
+	learning_rate=0.001,
+	learning_rule="momentum",
+	valid_size=0.1,
+	verbose=1)

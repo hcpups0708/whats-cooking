@@ -31,6 +31,7 @@ def main():
     ingredients_total={}
     X=[]
     Y=[]
+    Y_v_t=[]
     X_unknown=[]
     #gnb=GaussianNB()
     ovr=OneVsRestClassifier(LogisticRegression(),n_jobs=1)
@@ -65,8 +66,8 @@ def main():
     with io.open('veg.txt', encoding = 'utf8') as f:
         veg = f.read().splitlines()
 
-    #subdata=data                        #use full data for training
-    subdata=random.sample(data,200)   #randomly select n data for training
+    subdata=data                        #use full data for training
+    #subdata=random.sample(data,2000)   #randomly select n data for training
 
 
     #count and add ingredients / countries
@@ -172,6 +173,10 @@ def main():
         #print(dish['id'],attr['spiceRate'],attr['ingUsedInDish'])
         X.append(attr.values())
         Y.append(dish['cuisine'])
+        if dish['cuisine']=='vietnamese' or dish['cuisine']=='thai':
+            Y_v_t.append(1)
+        else:
+            Y_v_t.append(0)
     X=np.array(X)
     Y=np.array(Y)
 
